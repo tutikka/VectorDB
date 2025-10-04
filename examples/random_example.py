@@ -11,7 +11,7 @@ def embedding(n):
     return result
 
 print("creating index...")
-r = requests.post("http://localhost:8080/api/indexes", json={"name": "random_testing", "dimensions": dimensions, "similarity": "cosine", "optimization": "none"})
+r = requests.post("http://localhost:8080/api/indexes", json={"name": "random_testing", "dimensions": dimensions, "similarity": "euclid", "optimization": "none"})
 index = r.json()["id"]
 
 for id in range(entries):

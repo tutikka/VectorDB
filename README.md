@@ -24,6 +24,20 @@ data.directory = data
 data.max_vectors_per_index = 65536
 ```
 
+# Examples
+
+## Random Values with Euclid Similarity
+
+**Full Code**
+
+[random_example.py](examples/random_example.py)
+
+## RAG Example with OpenAI Embeddings
+
+**Full Code**
+
+[openai_example](examples/openai_example.py)
+
 # API
 
 ## Summary
