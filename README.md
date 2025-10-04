@@ -190,3 +190,120 @@ Open-source vector database designed for simplicity and speed, with flexible dep
   ]
 }
 ```
+
+### List Entries in Index
+
+**Method**
+
+`GET`
+
+**URI**
+
+`/api/indexes/{id}/entries`
+
+**Query Parameters**
+
+- `id`: The index identifier
+- `offset`: The position in the index where to start retrieving entries 
+- `limit`: Maximun number of entries to retrieve
+
+**Request Body**
+
+*None*
+
+**Response Status**
+
+- `HTTP 200`: Ok
+- `HTTP 400`: Error listing entries due to client input
+- `HTTP 404`: Index not found
+- `HTTP 500`: Error listing entries due to server error
+
+**Response Body**
+
+```json
+[
+  {
+    "id": 1,
+    "embedding": [
+      0.2672612,
+      0.5345224,
+      0.8017837
+    ]
+  },
+  {
+    "id": 2,
+    "embedding": [
+      0.37139064,
+      0.557086,
+      0.7427813
+    ]
+  },
+  {
+    "id": 3,
+    "embedding": [
+      0.4242641,
+      0.56568545,
+      0.70710677
+    ]
+  }
+]
+```
+
+### Submit Search for Entries in Index
+
+**Method**
+
+`POST`
+
+**URI**
+
+`/api/indexes/{id}/search`
+
+**Query Parameters**
+
+- `id`: The index identifier
+
+**Request Body**
+
+```json
+{
+    "embedding": [
+        0.1,
+        0.2,
+        0.3
+    ],
+    "top": 3
+}
+```
+
+**Response Status**
+
+- `HTTP 200`: Ok
+- `HTTP 400`: Error searching entries due to client input
+- `HTTP 404`: Index not found
+- `HTTP 500`: Error searching entries due to server error
+
+**Response Body**
+
+```json
+{
+  "matches": [
+    {
+      "id": 1,
+      "distance": 5.9604644775390625E-8
+    },
+    {
+      "id": 2,
+      "distance": 0.007416725158691406
+    },
+    {
+      "id": 3,
+      "distance": 0.017292380332946777
+    }
+  ],
+  "duration": 0,
+  "scanned": 3,
+  "total": 3,
+  "similarity": "cosine"
+}
+```
