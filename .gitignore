@@ -1,0 +1,6 @@
+target/
+data/
+.idea/
+.mvn/
+examples/.env
+.DS_Store
