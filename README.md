@@ -1,6 +1,6 @@
 # VectorDB
 
-Open-source vector database designed for simplicity and speed, with flexible deployment options.
+Open-source vector database designed for simplicity and speed, with flexible deployment options for local development, shared on-premises and shared cloud use.
 
 # Installation
 
