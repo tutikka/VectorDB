@@ -8,6 +8,34 @@ Open-source vector database designed for simplicity and speed, with flexible dep
 
 ## Build from Source
 
+### Requirements
+
+- Java 17 or later (tested using `17.0.9-zulu`)
+- Git client
+- Maven
+
+### MacOS/Linus/Unix
+
+Clone this repository:
+
+`$ git clone https://github.com/tutikka/VectorDB.git`
+
+Change to cloned folder:
+
+`$ cd VectorDB`
+
+Clean, compile and package using `Maven`:
+
+`$ mvnw package`
+
+Change to created target directory:
+
+`$ cd target`
+
+Start the application:
+
+`$ java -jar vectordb-0.0.1-SNAPSHOT.jar`
+
 # Configuration
 
 The application will look for a configuration file named `vectordb.properties` in the root directory of the application during startup. If the file is not found, default values (shown in the example below) will be used.
