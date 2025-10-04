@@ -8,6 +8,22 @@ Open-source vector database designed for simplicity and speed, with flexible dep
 
 ## Build from Source
 
+# Configuration
+
+The application will look for a configuration file named `vectordb.properties` in the root directory of the application during startup. If the file is not found, default values (shown in the example below) will be used.
+
+```properties
+#
+# directory for data files (default = 'data')
+#
+data.directory = data
+
+#
+# maximum number of vectors per index (default = 65536)
+#
+data.max_vectors_per_index = 65536
+```
+
 # API
 
 ## Summary
