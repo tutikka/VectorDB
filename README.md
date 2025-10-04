@@ -143,3 +143,50 @@ Open-source vector database designed for simplicity and speed, with flexible dep
   }
 }
 ```
+
+### Create New Entry into Index
+
+**Method**
+
+`POST`
+
+**URI**
+
+`/api/indexes/{id}/entries`
+
+**Query Parameters**
+
+- `id`: The index identifier
+
+**Request Body**
+
+```json
+{
+    "id": 1,
+    "embedding": [
+        0.1,
+        0.2,
+        0.3
+    ]
+}
+```
+
+**Response Status**
+
+- `HTTP 200`: Ok
+- `HTTP 400`: Error creating entry due to client input
+- `HTTP 404`: Index not found
+- `HTTP 500`: Error creating entry due to server error
+
+**Response Body**
+
+```json
+{
+  "id": 1,
+  "embedding": [
+    0.2672612,
+    0.5345224,
+    0.8017837
+  ]
+}
+```
