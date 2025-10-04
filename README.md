@@ -28,15 +28,30 @@ data.max_vectors_per_index = 65536
 
 ## Random Values with Euclid Similarity
 
+1. Create index with `3 dimensions` and `euclid similarity`
+2. Create entries into the index with random values as embeddings
+3. Search for the best matching entry based on given embedding
+4. Clean up and delete index
+
 **Full Code**
 
 [random_example.py](examples/random_example.py)
 
-## RAG Example with OpenAI Embeddings
+## RAG Example with OpenAI Embeddings and Chat Completion
+
+This example is closer to a real-world scenario, where we have documents that we want to index to perform queries based on similarity, and then summarize best results based on a user's question.
+
+1. Create index with `1536` dimensions (from OpenAI `ada-002` text embedding model) and `cosine` similarity
+2. Create entries into the index by embedding each document using the OpenAI `ada-002` text embedding model
+3. Search for the best matching entry based on the user's question (embedded with the same model)
+4. Retrieve the original document identifier from the search results
+5. Use a chat completion model (OpenAI `gpt-5`) to summarize the retrieved document based on the user's original question
+
+*Note!* Make sure to add a `.env` file in the same directory with your **OpenAI API Key**
 
 **Full Code**
 
-[openai_example](examples/openai_example.py)
+[openai_example.py](examples/openai_example.py)
 
 # API
 
