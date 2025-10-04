@@ -18,23 +18,33 @@ Open-source vector database designed for simplicity and speed, with flexible dep
 
 Clone this repository:
 
-`$ git clone https://github.com/tutikka/VectorDB.git`
+```shell
+git clone https://github.com/tutikka/VectorDB.git
+```
 
 Change to cloned folder:
 
-`$ cd VectorDB`
+```shell
+$ cd VectorDB
+```
 
 Clean, compile and package using `Maven`:
 
-`$ mvnw package`
+```shell
+mvnw package
+```
 
 Change to created target directory:
 
-`$ cd target`
+```shell
+cd target
+```
 
 Start the application:
 
-`$ java -jar vectordb-0.0.1-SNAPSHOT.jar`
+```shell
+java -jar vectordb-0.0.1-SNAPSHOT.jar
+```
 
 # Configuration
 
