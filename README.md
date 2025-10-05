@@ -83,6 +83,19 @@ data.max_vectors_per_index = 65536
 
 [random_example.py](examples/random_example.py)
 
+## Planet Positions with Euclid Similarity
+
+This example maps the positions of the planets in our solar system on 1.1.2025 to a 3D space using the sun as the origin, and then tests which planets are closest.
+
+1. Create index with `3` dimensions (X, Y and Z coordinates) and `euclid` similarity
+2. Create entries to the index for each planet based on the position at 1.1.2025
+3. Search for the 3 closest planets to the sun
+4. Clean up and delete index
+
+**Full Code**
+
+[planets_example.py](examples/planets_example.py)
+
 ## RAG Example with OpenAI Embeddings and Chat Completion
 
 This example is closer to a real-world scenario, where we have documents that we want to index to perform queries based on similarity, and then summarize best results based on a user's question.
