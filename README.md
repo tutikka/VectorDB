@@ -14,7 +14,7 @@ Open-source vector database designed for simplicity and speed, with flexible dep
 - Git client
 - Maven
 
-### MacOS/Linus/Unix
+### MacOS/Linux/Unix
 
 Clone this repository:
 
