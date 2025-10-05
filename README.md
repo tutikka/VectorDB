@@ -13,6 +13,7 @@ Open-source vector database designed for simplicity and speed, with flexible dep
 - Java 17 or later (tested using `17.0.9-zulu`)
 - Git client
 - Maven
+- Docker
 
 ### MacOS/Linux/Unix
 
@@ -44,6 +45,13 @@ Start the application:
 
 ```shell
 java -jar vectordb-0.0.1-SNAPSHOT.jar
+```
+
+Or build a Docker image and run it, for example:
+
+```shell
+docker build -t vectordb/vectordb .
+docker run -p 8080:8080 vectordb/vectordb
 ```
 
 # Configuration
