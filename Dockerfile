@@ -1,7 +1,7 @@
 FROM openjdk:17-jdk-slim
-RUN groupadd --gid 1000 vectordb && useradd --uid 1000 --gid 1000 vectordb
+RUN groupadd --gid 1000 vectordb && useradd --uid 1000 --gid 1000 vectordb --home-dir /home/vectordb
 USER vectordb
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} app.jar
-COPY vectordb.properties .
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+WORKDIR /home/vectordb
+COPY target/*.jar /home/vectordb/vectordb.jar
+COPY vectordb.properties /home/vectordb/vectordb.properties
+ENTRYPOINT ["java", "-jar", "vectordb.jar"]

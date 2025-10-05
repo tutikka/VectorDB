@@ -23,10 +23,20 @@ public class IndexStore {
     private Map<Long, Index> indexes = new HashMap<>();
 
     public IndexStore() throws Exception {
-        File file = new File(Configuration.getConfiguration().get("data.directory", "data"), FILENAME);
-        List<Index> list = mapper.readValue(file, new TypeReference<List<Index>>() {});
-        for (Index index : list) {
-            indexes.put(index.getId(), index);
+        File dir = new File(Configuration.getConfiguration().get("data.directory", "data"));
+        if (!dir.exists()) {
+            if (dir.mkdirs()) {
+                L.info(String.format("created data directory '%s'", dir.getAbsolutePath()));
+            } else {
+                throw new Exception(String.format("error creating data directory '%s'", dir.getAbsolutePath()));
+            }
+        }
+        File file = new File(dir, FILENAME);
+        if (file.exists()) {
+            List<Index> list = mapper.readValue(file, new TypeReference<List<Index>>() {});
+            for (Index index : list) {
+                indexes.put(index.getId(), index);
+            }
         }
     }
 
