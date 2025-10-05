@@ -25,7 +25,7 @@ git clone https://github.com/tutikka/VectorDB.git
 Change to cloned folder:
 
 ```shell
-$ cd VectorDB
+cd VectorDB
 ```
 
 Clean, compile and package using `Maven`:
