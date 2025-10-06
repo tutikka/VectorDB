@@ -48,7 +48,7 @@ print("searching entries...")
 r = requests.post("http://localhost:8080/api/indexes/" + str(index) + "/search", json={"top": 3, "embedding": [0, 0, 0]})
 print("3 closest planets to the sun:")
 for match in r.json()["matches"]:
-    print(planets[match["id"]]["name"])
+    print(planets[match["id"]]["name"] + " " + str(int(match["distance"])) + " km")
 
 print("deleting index...")
 r = requests.delete("http://localhost:8080/api/indexes/" + str(index))
