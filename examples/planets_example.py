@@ -46,7 +46,7 @@ for k,v in planets.items():
 
 print("searching entries...")
 r = requests.post("http://localhost:8080/api/indexes/" + str(index) + "/search", json={"top": 3, "embedding": [0, 0, 0]})
-print("3 closests planets to the sun:")
+print("3 closest planets to the sun:")
 for match in r.json()["matches"]:
     print(planets[match["id"]]["name"])
 

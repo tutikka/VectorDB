@@ -79,9 +79,7 @@ data.max_vectors_per_index = 65536
 3. Search for the best matching entry based on given embedding
 4. Clean up and delete index
 
-**Full Code**
-
-[random_example.py](examples/random_example.py)
+[View full source (Python)](examples/random_example.py)
 
 ## Planet Positions with Euclid Similarity
 
@@ -92,9 +90,7 @@ This example maps the positions of the planets in our solar system on 1.1.2025 t
 3. Search for the 3 closest planets to the sun
 4. Clean up and delete index
 
-**Full Code**
-
-[planets_example.py](examples/planets_example.py)
+[View full source (Python)](examples/planets_example.py)
 
 ## RAG Example with OpenAI Embeddings and Chat Completion
 
@@ -108,9 +104,7 @@ This example is closer to a real-world scenario, where we have documents that we
 
 *Note!* Make sure to add a `.env` file in the same directory with your **OpenAI API Key**
 
-**Full Code**
-
-[openai_example.py](examples/openai_example.py)
+[View full source (Python)](examples/openai_example.py)
 
 # API
 
