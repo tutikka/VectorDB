@@ -422,14 +422,11 @@ Example:
 //
 // values are read from:
 //
-// - 'vectordb.properties' file from application working directory
-// - properties file location defined by 'configuration' environment variable
+// 1. 'vectordb.properties' file from application working directory
+// 2. properties file location defined by 'configuration' environment variable
+// 3. default values are used
 //
-try {
-    Configuration.getConfiguration();
-} catch (Exception e) {
-    // todo
-}
+Configuration.getConfiguration();
 
 //
 // create index
