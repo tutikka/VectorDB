@@ -56,43 +56,6 @@ docker build -t vectordb/vectordb .
 docker run -p 8080:8080 vectordb/vectordb
 ```
 
-## Embedded Use
-
-VectorDB can be embedded into another Java application as a library. Follow the instructions above to download a binary release or build the `JAR` file yourself, and add it as a dependency to your project.
-
-**Note!** This section still under development.
-
-Example:
-
-```java
-//
-// initialize configuration
-//
-// values are read from:
-//
-// - 'vectordb.properties' file from application working directory
-// - properties file location defined by 'configuration' environment variable
-//
-try {
-    Configuration.getConfiguration();
-} catch (Exception e) {
-    // todo
-}
-
-//
-// create index
-//
-Index index = new Index();
-index.setName("test");
-index.setDimensions(3);
-index.setSimilarity("cosine");
-index.setOptimization("none");
-try {
-    DBService.getService().createIndex(index);
-} catch (Exception e) {
-    // todo    
-}
-
 //
 // create entry into index
 //
@@ -457,3 +420,40 @@ This example is closer to a real-world scenario, where we have documents that we
   "similarity": "cosine"
 }
 ```
+
+# Embedded Use
+
+VectorDB can be embedded into another Java application as a library. Follow the instructions above to download a binary release or build the `JAR` file yourself, and add it as a dependency to your project.
+
+**Note!** This section still under development.
+
+Example:
+
+```java
+//
+// initialize configuration
+//
+// values are read from:
+//
+// - 'vectordb.properties' file from application working directory
+// - properties file location defined by 'configuration' environment variable
+//
+try {
+    Configuration.getConfiguration();
+} catch (Exception e) {
+    // todo
+}
+
+//
+// create index
+//
+Index index = new Index();
+index.setName("test");
+index.setDimensions(3);
+index.setSimilarity("cosine");
+index.setOptimization("none");
+try {
+    DBService.getService().createIndex(index);
+} catch (Exception e) {
+    // todo    
+}
