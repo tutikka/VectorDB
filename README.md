@@ -56,19 +56,6 @@ docker build -t vectordb/vectordb .
 docker run -p 8080:8080 vectordb/vectordb
 ```
 
-//
-// create entry into index
-//
-Entry entry = new Entry();
-entry.setId(1);
-entry.setEmbedding(new float[]{0.1, 0.2, 0.3});
-try {
-    DBService.getService().createEntry(1, entry)); // index id = 1
-} catch (Exception e) {
-    // todo    
-}
-```
-
 # Configuration
 
 The application will look for a configuration file named `vectordb.properties` in the root directory of the application during startup. If the file is not found, default values (shown in the example below) will be used.
@@ -457,3 +444,16 @@ try {
 } catch (Exception e) {
     // todo    
 }
+
+//
+// create entry into index
+//
+Entry entry = new Entry();
+entry.setId(1);
+entry.setEmbedding(new float[]{0.1, 0.2, 0.3});
+try {
+    DBService.getService().createEntry(1, entry)); // index id = 1
+} catch (Exception e) {
+    // todo    
+}
+```
