@@ -1,10 +1,12 @@
 # VectorDB
 
-Open-source vector database designed for simplicity and speed, with flexible deployment options for local development, shared on-premises and shared cloud use.
+Open-source vector database designed for simplicity and speed, with flexible deployment options.
 
 # Installation
 
 ## Binary Releases
+
+*None*
 
 ## Build from Source
 
@@ -52,6 +54,56 @@ Or build a Docker image and run it, for example:
 ```shell
 docker build -t vectordb/vectordb .
 docker run -p 8080:8080 vectordb/vectordb
+```
+
+## Embedded Use
+
+VectorDB can be embedded into another Java application as a library. Follow the instructions above to download a binary release or build the `JAR` file yourself, and add it as a dependency to your project.
+
+**Note!** This section still under development.
+
+Example:
+
+```java
+//
+// initialize configuration
+//
+// values are read from:
+//
+// - 'vectordb.properties' file from application working directory
+// - properties file location defined by 'configuration' environment variable
+//
+try {
+    Configuration.getConfiguration();
+} catch (Exception e) {
+    // todo
+}
+
+//
+// create index
+//
+Index index = new Index();
+index.setName("test");
+index.setDimensions(3);
+index.setSimilarity("cosine");
+index.setOptimization("none");
+try {
+    DBService.getService().createIndex(index);
+} catch (Exception e) {
+    // todo    
+}
+
+//
+// create entry into index
+//
+Entry entry = new Entry();
+entry.setId(1);
+entry.setEmbedding(new float[]{0.1, 0.2, 0.3});
+try {
+    DBService.getService().createEntry(1, entry)); // index id = 1
+} catch (Exception e) {
+    // todo    
+}
 ```
 
 # Configuration
