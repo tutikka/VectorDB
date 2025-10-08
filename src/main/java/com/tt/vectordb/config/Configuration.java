@@ -18,9 +18,10 @@ public class Configuration {
     private Properties properties;
 
     private Configuration() {
+        File file = new File(System.getProperty("configuration", FILENAME));
         try {
             properties = new Properties();
-            properties.load(new FileReader(new File(FILENAME)));
+            properties.load(new FileReader(file));
             L.info(String.format("loaded %d properties from file '%s'", properties.size(), FILENAME));
         } catch (Exception e) {
             L.error(String.format("error loading properties from file '%s': %s", FILENAME, e.getMessage()));
