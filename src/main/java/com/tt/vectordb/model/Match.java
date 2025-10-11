@@ -1,4 +1,4 @@
-package com.tt.vectordb.controller.dto;
+package com.tt.vectordb.model;
 
 public class Match {
 

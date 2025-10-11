@@ -1,12 +1,12 @@
 package com.tt.vectordb.service;
 
-import com.tt.vectordb.controller.dto.SearchEntriesRequest;
+import com.tt.vectordb.model.Search;
 import com.tt.vectordb.storage.VectorStoreItem;
 
 public class CosineSimilarity implements Similarity {
 
     @Override
-    public double compare(SearchEntriesRequest search, VectorStoreItem item) {
+    public double compare(Search search, VectorStoreItem item) {
         return (1 - cosineSimilarity(search.getEmbedding(), item.getEmbedding()));
     }
 

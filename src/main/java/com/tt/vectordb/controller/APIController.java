@@ -4,6 +4,7 @@ import com.tt.vectordb.config.Configuration;
 import com.tt.vectordb.controller.dto.*;
 import com.tt.vectordb.model.Entry;
 import com.tt.vectordb.model.Index;
+import com.tt.vectordb.model.SearchResult;
 import com.tt.vectordb.service.DBService;
 import jakarta.annotation.PreDestroy;
 import org.springframework.http.HttpStatus;
@@ -111,9 +112,10 @@ public class APIController {
 
     @PostMapping("/indexes/{id}/search")
     @ResponseBody
-    public SearchEntriesResponse searchEntries(@PathVariable("id") long id, @RequestBody SearchEntriesRequest search) {
+    public SearchEntriesResponse searchEntries(@PathVariable("id") long id, @RequestBody SearchEntriesRequest request) {
         try {
-            return (DBService.getService().searchEntries(id, search));
+            SearchResult result = DBService.getService().searchEntries(id, SearchEntriesRequest.toSearch(request));
+            return (SearchEntriesResponse.fromSearchResult(result));
         } catch (IllegalArgumentException e) {
             e.printStackTrace(System.err);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());

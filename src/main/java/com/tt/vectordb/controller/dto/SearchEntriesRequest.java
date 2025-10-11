@@ -1,5 +1,8 @@
 package com.tt.vectordb.controller.dto;
 
+import com.tt.vectordb.model.Entry;
+import com.tt.vectordb.model.Search;
+
 public class SearchEntriesRequest {
 
     private float[] embedding;
@@ -7,6 +10,13 @@ public class SearchEntriesRequest {
     private int top;
 
     public SearchEntriesRequest() {
+    }
+
+    public static Search toSearch(SearchEntriesRequest request) {
+        Search search = new Search();
+        search.setEmbedding(request.getEmbedding());
+        search.setTop(request.getTop());
+        return (search);
     }
 
     public float[] getEmbedding() {

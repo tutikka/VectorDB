@@ -1,9 +1,8 @@
 package com.tt.vectordb.service;
 
 import com.tt.vectordb.config.Configuration;
-import com.tt.vectordb.controller.dto.Match;
+import com.tt.vectordb.model.Match;
 import com.tt.vectordb.controller.dto.SearchEntriesResponse;
-import com.tt.vectordb.controller.dto.SearchEntriesRequest;
 import com.tt.vectordb.model.*;
 import com.tt.vectordb.storage.IndexStore;
 import com.tt.vectordb.storage.VectorStore;
@@ -170,21 +169,21 @@ public class DBService {
         return (entries);
     }
 
-    public SearchEntriesResponse searchEntries(long id, SearchEntriesRequest request) throws Exception {
+    public SearchResult searchEntries(long id, Search search) throws Exception {
         Index index = getIndex(id);
         if (index == null) {
             throw new IllegalArgumentException(String.format("index '%d' not found", id));
         }
-        if (request == null) {
+        if (search == null) {
             throw new IllegalArgumentException("unrecognized request");
         }
-        if (request.getEmbedding() == null) {
+        if (search.getEmbedding() == null) {
             throw new IllegalArgumentException("search embedding cannot be empty");
         }
-        if (request.getEmbedding().length != index.getDimensions()) {
-            throw new IllegalArgumentException(String.format("length of search embedding (%d) must be equal to index dimension (%d)", request.getEmbedding().length, index.getDimensions()));
+        if (search.getEmbedding().length != index.getDimensions()) {
+            throw new IllegalArgumentException(String.format("length of search embedding (%d) must be equal to index dimension (%d)", search.getEmbedding().length, index.getDimensions()));
         }
-        if (request.getTop() < 1 || request.getTop() > 128) {
+        if (search.getTop() < 1 || search.getTop() > 128) {
             throw new IllegalArgumentException("top must be in range 1-128");
         }
         VectorStore store = vectorStores.get(id);
@@ -200,30 +199,30 @@ public class DBService {
         for (int i = 0; i < store.getSlot(); i++) {
             VectorStoreItem item = store.read(i);
             switch (index.getSimilarity()) {
-                case Index.SIMILARITY_COSINE_DISTANCE -> item.setDistance(new CosineSimilarity().compare(request, item));
-                case Index.SIMILARITY_EUCLID_DISTANCE -> item.setDistance(new EuclidSimilarity().compare(request, item));
-                case Index.SIMILARITY_MANHATTAN_DISTANCE -> item.setDistance(new ManhattanSimilarity().compare(request, item));
+                case Index.SIMILARITY_COSINE_DISTANCE -> item.setDistance(new CosineSimilarity().compare(search, item));
+                case Index.SIMILARITY_EUCLID_DISTANCE -> item.setDistance(new EuclidSimilarity().compare(search, item));
+                case Index.SIMILARITY_MANHATTAN_DISTANCE -> item.setDistance(new ManhattanSimilarity().compare(search, item));
             }
             queue.offer(item);
-            if (queue.size() > request.getTop()) {
+            if (queue.size() > search.getTop()) {
                 queue.poll();
             }
             scanned++;
         }
         long end = System.currentTimeMillis();
-        SearchEntriesResponse response = new SearchEntriesResponse();
-        response.setDuration(end - start);
-        response.setScanned(scanned);
-        response.setTotal(total);
-        response.setSimilarity(index.getSimilarity());
+        SearchResult result = new SearchResult();
+        result.setDuration(end - start);
+        result.setScanned(scanned);
+        result.setTotal(total);
+        result.setSimilarity(index.getSimilarity());
         for (VectorStoreItem item : queue) {
             Match match = new Match();
             match.setId(item.getId());
             match.setDistance(item.getDistance());
-            response.getMatches().add(match);
+            result.getMatches().add(match);
         }
-        response.getMatches().sort((a, b) -> Double.compare(a.getDistance(), b.getDistance()));
-        return (response);
+        result.getMatches().sort((a, b) -> Double.compare(a.getDistance(), b.getDistance()));
+        return (result);
     }
 
     public void close() {

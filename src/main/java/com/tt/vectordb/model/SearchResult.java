@@ -1,12 +1,9 @@
-package com.tt.vectordb.controller.dto;
-
-import com.tt.vectordb.model.Match;
-import com.tt.vectordb.model.SearchResult;
+package com.tt.vectordb.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchEntriesResponse {
+public class SearchResult {
 
     private List<Match> matches = new ArrayList<>();
 
@@ -18,16 +15,7 @@ public class SearchEntriesResponse {
 
     private String similarity;
 
-    public SearchEntriesResponse() {
-    }
-
-    public static SearchEntriesResponse fromSearchResult(SearchResult result) {
-        SearchEntriesResponse response = new SearchEntriesResponse();
-        response.setMatches(result.getMatches());
-        response.setDuration(result.getDuration());
-        response.setTotal(result.getTotal());
-        response.setSimilarity(result.getSimilarity());
-        return (response);
+    public SearchResult() {
     }
 
     public List<Match> getMatches() {
