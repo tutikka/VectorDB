@@ -8,6 +8,8 @@ public class Index {
 
     public static final String SIMILARITY_EUCLID_DISTANCE = "euclid";
 
+    public static final String SIMILARITY_MANHATTAN_DISTANCE = "manhattan";
+
     public static final String OPTIMIZATION_NONE = "none";
 
     private long id;
@@ -16,11 +18,8 @@ public class Index {
 
     private int dimensions;
 
-    // cosine
-    // euclid
     private String similarity;
 
-    // none
     private String optimization;
 
     public Index() {

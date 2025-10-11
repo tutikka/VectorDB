@@ -59,8 +59,8 @@ public class DBService {
         if (index.getName() == null || index.getName().isEmpty()) {
             throw new IllegalArgumentException("index name must not be empty");
         }
-        if (index.getSimilarity() == null || (!index.getSimilarity().equals("cosine") && !index.getSimilarity().equals("euclid"))) {
-            throw new IllegalArgumentException("acceptable values for index similarity are ['cosine', 'euclid']");
+        if (index.getSimilarity() == null || !Arrays.stream((new String[]{"cosine", "euclid", "manhattan"})).toList().contains(index.getSimilarity())) {
+            throw new IllegalArgumentException("acceptable values for index similarity are ['cosine', 'euclid', 'manhattan']");
         }
         if (index.getOptimization() == null || !index.getOptimization().equals("none")) {
             throw new IllegalArgumentException("acceptable values for index optimization are ['none']");
@@ -202,6 +202,7 @@ public class DBService {
             switch (index.getSimilarity()) {
                 case Index.SIMILARITY_COSINE_DISTANCE -> item.setDistance(new CosineSimilarity().compare(request, item));
                 case Index.SIMILARITY_EUCLID_DISTANCE -> item.setDistance(new EuclidSimilarity().compare(request, item));
+                case Index.SIMILARITY_MANHATTAN_DISTANCE -> item.setDistance(new ManhattanSimilarity().compare(request, item));
             }
             queue.offer(item);
             if (queue.size() > request.getTop()) {

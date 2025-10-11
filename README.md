@@ -74,20 +74,20 @@ data.max_vectors_per_index = 65536
 
 # Examples
 
-## Random Values with Euclid Similarity
+## Random Values
 
-1. Create index with `3 dimensions` and `euclid similarity`
+1. Create index with `3 dimensions` and similarity based on `manhattan distance`
 2. Create entries into the index with random values as embeddings
 3. Search for the best matching entry based on given embedding
 4. Clean up and delete index
 
 [View full source (Python)](examples/random_example.py)
 
-## Planet Positions with Euclid Similarity
+## Planet Positions
 
 This example maps the positions of the planets in our solar system on 1.1.2025 to a 3D space using the sun as the origin, and then tests which planets are closest.
 
-1. Create index with `3` dimensions (X, Y and Z coordinates) and `euclid` similarity
+1. Create index with `3` dimensions (X, Y and Z coordinates) and similarity based on `euclid distance`
 2. Create entries to the index for each planet based on the position at 1.1.2025
 3. Search for the 3 closest planets to the sun
 4. Clean up and delete index
@@ -98,7 +98,7 @@ This example maps the positions of the planets in our solar system on 1.1.2025 t
 
 This example is closer to a real-world scenario, where we have documents that we want to index to perform queries based on similarity, and then summarize best results based on a user's question.
 
-1. Create index with `1536` dimensions (from OpenAI `ada-002` text embedding model) and `cosine` similarity
+1. Create index with `1536` dimensions (from OpenAI `ada-002` text embedding model) and similarity based on `cosine distance`
 2. Create entries into the index by embedding each document using the OpenAI `ada-002` text embedding model
 3. Search for the best matching entry based on the user's question (embedded with the same model)
 4. Retrieve the original document identifier from the search results
