@@ -17,7 +17,6 @@ public class CreateIndexRequest {
 
     public static Index toIndex(CreateIndexRequest request) {
         Index index = new Index();
-        index.setId(System.currentTimeMillis());
         index.setName(request.getName());
         index.setDimensions(request.getDimensions());
         index.setSimilarity(request.getSimilarity());

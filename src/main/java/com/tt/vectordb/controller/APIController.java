@@ -26,6 +26,7 @@ public class APIController {
     public CreateIndexResponse createIndex(@RequestBody CreateIndexRequest request) {
         try {
             Index index = CreateIndexRequest.toIndex(request);
+            index.setId(System.currentTimeMillis());
             DBService.getService().createIndex(index);
             return (CreateIndexResponse.fromIndex(index));
         } catch (IllegalArgumentException e) {

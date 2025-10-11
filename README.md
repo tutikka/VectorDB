@@ -417,40 +417,40 @@ VectorDB can be embedded into another Java application as a library. Follow the 
 Example:
 
 ```java
-//
-// initialize configuration
-//
-// values are read from:
-//
-// 1. 'vectordb.properties' file from application working directory
-// 2. properties file location defined by 'configuration' environment variable
-// 3. default values are used
-//
-Configuration.getConfiguration();
+Random random = new Random();
 
-//
+// initialize properties
+Properties properties = new Properties();
+properties.setProperty("data.directory", "data");
+properties.setProperty("data.max_vectors_per_index", "65536");
+
+// new instance
+VectorDB db = new VectorDB(properties);
+
 // create index
-//
 Index index = new Index();
 index.setName("test");
 index.setDimensions(3);
-index.setSimilarity("cosine");
-index.setOptimization("none");
-try {
-    DBService.getService().createIndex(index);
-} catch (Exception e) {
-    // todo    
+index.setSimilarity(Index.SIMILARITY_COSINE_DISTANCE);
+index.setOptimization(Index.OPTIMIZATION_NONE);
+index = db.createIndex(index);
+
+// create entries
+for (int i = 0; i < 100; i++) {
+    Entry entry = new Entry();
+    entry.setId(i + 1);
+    entry.setEmbedding(new float[]{random.nextFloat(), random.nextFloat(), random.nextFloat()});
+    db.createEntry(index.getId(), entry);
 }
 
-//
-// create entry into index
-//
-Entry entry = new Entry();
-entry.setId(1);
-entry.setEmbedding(new float[]{0.1, 0.2, 0.3});
-try {
-    DBService.getService().createEntry(1, entry)); // index id = 1
-} catch (Exception e) {
-    // todo    
-}
+// search for entries
+Search search = new Search();
+search.setTop(1);
+search.setEmbedding(new float[]{random.nextFloat(), random.nextFloat(), random.nextFloat()});
+SearchResult result = db.searchEntries(index.getId(), search);
+Match match = result.getMatches().get(0);
+System.out.printf("closest entry: id = %d, distance = %f%n", match.getId(), match.getDistance());
+
+// delete index
+db.deleteIndex(index.getId());
 ```
