@@ -29,9 +29,20 @@ public class Configuration {
         }
     }
 
+    private Configuration(Properties properties) {
+        this.properties = properties;
+    }
+
     public static Configuration getConfiguration() {
         if (configuration == null) {
             configuration = new Configuration();
+        }
+        return (configuration);
+    }
+
+    public static Configuration getConfiguration(Properties properties) {
+        if (configuration == null) {
+            configuration = new Configuration(properties);
         }
         return (configuration);
     }

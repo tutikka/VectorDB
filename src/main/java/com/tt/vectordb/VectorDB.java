@@ -1,5 +1,6 @@
 package com.tt.vectordb;
 
+import com.tt.vectordb.config.Configuration;
 import com.tt.vectordb.model.*;
 import com.tt.vectordb.service.DBService;
 
@@ -9,6 +10,7 @@ import java.util.Random;
 public class VectorDB {
 
     public VectorDB(Properties properties) throws Exception {
+        Configuration.getConfiguration(properties);
     }
 
     public Index createIndex(Index index) throws Exception {
