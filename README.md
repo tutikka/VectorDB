@@ -2,6 +2,26 @@
 
 Open-source vector database designed for simplicity and speed, with flexible deployment options.
 
+**Features**
+
+- Create and manage indexes
+- Create and manage vector embeddings in indexes
+- Search for embeddings in indexes based on distance
+  - Cosine distance
+  - Euclid distance
+  - Manhattan distance
+
+**APIs**
+
+- RESTful HTTP API using JSON
+- Embedded use (Java)
+
+**Deployment**
+
+- Standalone Java application
+- Docker
+- Include as library (Java)
+
 # Installation
 
 ## Binary Releases
