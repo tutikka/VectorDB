@@ -57,7 +57,7 @@ public class IndexStore {
     }
 
     public void close() throws Exception {
-        File file = new File("data/indexes.json");
+        File file = new File(Configuration.getConfiguration().get("data.directory", "data"), FILENAME);
         mapper.writeValue(file, list());
         L.info(String.format("wrote %d indexes to file '%s'", indexes.size(), file.getAbsolutePath()));
     }
