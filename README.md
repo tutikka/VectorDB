@@ -2,6 +2,10 @@
 
 Open-source vector database designed for simplicity and speed, with flexible deployment options.
 
+For embedded use as a library in Java projects, see:
+
+https://github.com/tutikka/LibVectorDB
+
 **Features**
 
 - Create and manage indexes
