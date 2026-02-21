@@ -1,7 +1,7 @@
-FROM openjdk:17-jdk-slim
-RUN groupadd --gid 1000 vectordb && useradd --uid 1000 --gid 1000 vectordb --home-dir /home/vectordb
-USER vectordb
+FROM eclipse-temurin:21-jre
+RUN groupadd -r vectordb && useradd -r -g vectordb -d /home/vectordb -m vectordb
 WORKDIR /home/vectordb
-COPY target/*.jar /home/vectordb/vectordb.jar
-COPY vectordb.properties /home/vectordb/vectordb.properties
-ENTRYPOINT ["java", "-jar", "vectordb.jar"]
+COPY --chown=vectordb:vectordb target/vectordb-*.jar vectordb.jar
+COPY --chown=vectordb:vectordb vectordb.properties .
+USER vectordb
+ENTRYPOINT ["java", "-XX:MaxRAMPercentage=75", "-jar", "vectordb.jar"]

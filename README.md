@@ -14,13 +14,11 @@ Open-source vector database designed for simplicity and speed, with flexible dep
 **APIs**
 
 - RESTful HTTP API using JSON
-- Embedded use (Java)
 
 **Deployment**
 
 - Standalone Java application
 - Docker
-- Include as library (Java)
 
 # Installation
 
@@ -32,7 +30,7 @@ Open-source vector database designed for simplicity and speed, with flexible dep
 
 ### Requirements
 
-- Java 17 or later (tested using `17.0.9-zulu`)
+- Java 21 or later (tested using `21.0.10-zulu`)
 - Git client
 - Maven
 - Docker
@@ -426,51 +424,4 @@ This example is closer to a real-world scenario, where we have documents that we
   "total": 3,
   "similarity": "cosine"
 }
-```
-
-# Embedded Use
-
-VectorDB can be embedded into another Java application as a library. Follow the instructions above to download a binary release or build the `JAR` file yourself, and add it as a dependency to your project.
-
-**Note!** This section still under development.
-
-Example:
-
-```java
-Random random = new Random();
-
-// initialize properties
-Properties properties = new Properties();
-properties.setProperty("data.directory", "data");
-properties.setProperty("data.max_vectors_per_index", "65536");
-
-// new instance
-VectorDB db = new VectorDB(properties);
-
-// create index
-Index index = new Index();
-index.setName("test");
-index.setDimensions(3);
-index.setSimilarity(Index.SIMILARITY_COSINE_DISTANCE);
-index.setOptimization(Index.OPTIMIZATION_NONE);
-index = db.createIndex(index);
-
-// create entries
-for (int i = 0; i < 100; i++) {
-    Entry entry = new Entry();
-    entry.setId(i + 1);
-    entry.setEmbedding(new float[]{random.nextFloat(), random.nextFloat(), random.nextFloat()});
-    db.createEntry(index.getId(), entry);
-}
-
-// search for entries
-Search search = new Search();
-search.setTop(1);
-search.setEmbedding(new float[]{random.nextFloat(), random.nextFloat(), random.nextFloat()});
-SearchResult result = db.searchEntries(index.getId(), search);
-Match match = result.getMatches().get(0);
-System.out.printf("closest entry: id = %d, distance = %f%n", match.getId(), match.getDistance());
-
-// delete index
-db.deleteIndex(index.getId());
 ```
